@@ -45,7 +45,7 @@
 	url = git@github.com:scalone/mruby-msgpack.git
 [submodule "mrbgems/mruby-cloudwalk-platform"]
 	path = mrbgems/mruby-cloudwalk-platform
-	url = git@github.com:cloudwalkio/mruby-cloudwalk-platform.git
+	url = git@github.com:FernandoCleberSouza/mruby-cloudwalk-platform.git
 [submodule "mrbgems/mruby-context"]
 	path = mrbgems/mruby-context
 	url = git@github.com:scalone/mruby-context.git
