@@ -1,3 +1,6 @@
+
+#require "cloudwalk_handshake"
+
 class Device
   self.adapter = Platform
 
