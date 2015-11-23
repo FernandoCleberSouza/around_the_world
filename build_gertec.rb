@@ -12,35 +12,34 @@ MRuby::Toolchain.new(:gcc_gertec) do |conf|
     cc.command = File.join(SDK_BIN_PATH, "arm-brcm-linux-gnueabi-gcc")
     cc.flags = %w(-g -std=gnu99 -O3 -Wall -Werror-implicit-function-declaration -Wdeclaration-after-statement)
     cc.option_include_path = '-I%s'
-	cc.include_paths = SDK_INCLUDE_PATH
+    cc.include_paths = SDK_INCLUDE_PATH
     cc.option_define = '-D%s'
     cc.compile_options = '%{flags} -MMD -o %{outfile} -c %{infile}'
   end
 
   [conf.cxx].each do |cxx|
-    cxx.command = '/cygdrive/c/Cloudwalk/cygwin64/opt/gnueabi/bin/arm-brcm-linux-gnueabi-g++'
+    cxx.command = File.join(SDK_BIN_PATH, "arm-brcm-linux-gnueabi-g++")
     cxx.flags = %w(-g -O3 -Wall -Werror-implicit-function-declaration)
-	cxx.include_paths += SDK_INCLUDE_PATH
-	cxx.option_include_path = '-I%s'
+    cxx.include_paths += SDK_INCLUDE_PATH
+    cxx.option_include_path = '-I%s'
     cxx.option_define = '-D%s'
     cxx.compile_options = '%{flags} -MMD -o %{outfile} -c %{infile}'
   end
 
   conf.linker do |linker|
-    #linker.command = '/cygdrive/c/Cloudwalk/cygwin64/opt/gnueabi/bin/arm-brcm-linux-gnueabi-gcc'
-	linker.command = File.join(SDK_BIN_PATH, "arm-brcm-linux-gnueabi-gcc")
+    linker.command = File.join(SDK_BIN_PATH, "arm-brcm-linux-gnueabi-gcc")
     linker.flags = %w(-Wl --whole-archive -lgedi --no-whole-archive)
     linker.libraries = %w(m)
-	linker.library_paths += SDK_LIBRARY_PATH
+    linker.library_paths += SDK_LIBRARY_PATH
     linker.option_library = '-l%s'
     linker.option_library_path = '-L%s'
     linker.link_options = '%{flags} -o %{outfile} %{objs} %{flags_before_libraries} %{libs} %{flags_after_libraries}'
   end
 
   conf.exts do |exts|
-	exts.object = '.o'
-	exts.executable = '.out'
-	exts.library = '.a'
+    exts.object = '.o'
+    exts.executable = '.out'
+    exts.library = '.a'
   end
 
   # file separetor
@@ -132,7 +131,7 @@ end
 # Define cross build settings
 MRuby::CrossBuild.new('device') do |conf|
   toolchain :gcc_gertec
-  
+
   enable_debug
 
   conf.bins = []
